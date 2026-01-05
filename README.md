@@ -105,3 +105,9 @@ DEV conatainer setup
 
 
 docker compose exec -T db mysql -u root -proot chawrimart < ../database.sql
+
+
+cat dummy_data.sql | docker exec -i devcontainer-db-1 mysql -u root -proot chawrimart
+
+
+Visit http://localhost:3000/api/docs (or configured port) to see the Swagger UI.
