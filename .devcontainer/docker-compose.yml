@@ -1,0 +1,43 @@
+name: devcontainer
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        VARIANT: 20-bullseye
+    command: sleep infinity
+    depends_on:
+      db:
+        condition: service_started
+    environment:
+      DB_HOST: db
+      DB_NAME: chawrimart
+      DB_PASSWORD: root
+      DB_USERNAME: root
+      REDIS_HOST: redis
+    volumes:
+      - type: bind
+        source: ..
+        target: /workspace
+
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: chawrimart
+      MYSQL_ROOT_PASSWORD: root
+    restart: always
+    volumes:
+      - db-data:/var/lib/mysql
+
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - redis-data:/data
+
+volumes:
+  db-data:
+  redis-data:

@@ -1,4 +1,4 @@
-users
+-- users
 CREATE TABLE users (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     uuid CHAR(36) UNIQUE NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE users (
     INDEX idx_role (role),
     INDEX idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-user_profiles
+-- user_profiles
 CREATE TABLE user_profiles (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT UNSIGNED NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE user_profiles (
     INDEX idx_state (state),
     INDEX idx_company_type (company_type)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-categories
+-- categories
 CREATE TABLE categories (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     parent_id BIGINT UNSIGNED NULL,
@@ -71,7 +71,7 @@ CREATE TABLE categories (
     INDEX idx_level (level),
     INDEX idx_is_active (is_active)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-products
+-- products
 CREATE TABLE products (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     uuid CHAR(36) UNIQUE NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE products (
     INDEX idx_published_at (published_at),
     FULLTEXT idx_name_description (name, description)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-product_images
+-- product_images
 CREATE TABLE product_images (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     product_id BIGINT UNSIGNED NOT NULL,
@@ -122,7 +122,7 @@ CREATE TABLE product_images (
     INDEX idx_product_id (product_id),
     INDEX idx_is_primary (is_primary)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-product_videos
+-- product_videos
 CREATE TABLE product_videos (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     product_id BIGINT UNSIGNED NOT NULL,
@@ -135,7 +135,7 @@ CREATE TABLE product_videos (
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
     INDEX idx_product_id (product_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-buy_leads (RFQ)
+-- buy_leads (RFQ)
 CREATE TABLE buy_leads (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     uuid CHAR(36) UNIQUE NOT NULL,
@@ -167,7 +167,7 @@ CREATE TABLE buy_leads (
     INDEX idx_expires_at (expires_at),
     FULLTEXT idx_product_name_description (product_name, description)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-lead_distributions
+-- lead_distributions
 CREATE TABLE lead_distributions (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     lead_id BIGINT UNSIGNED NOT NULL,
@@ -187,7 +187,7 @@ CREATE TABLE lead_distributions (
     INDEX idx_is_purchased (is_purchased),
     INDEX idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-lead_responses
+-- lead_responses
 CREATE TABLE lead_responses (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     lead_id BIGINT UNSIGNED NOT NULL,
@@ -207,7 +207,7 @@ CREATE TABLE lead_responses (
     INDEX idx_supplier_id (supplier_id),
     INDEX idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-conversations
+-- conversations
 CREATE TABLE conversations (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     uuid CHAR(36) UNIQUE NOT NULL,
@@ -230,7 +230,7 @@ CREATE TABLE conversations (
     INDEX idx_supplier_id (supplier_id),
     INDEX idx_last_message_at (last_message_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-messages
+-- messages
 CREATE TABLE messages (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     conversation_id BIGINT UNSIGNED NOT NULL,
@@ -250,7 +250,7 @@ CREATE TABLE messages (
     INDEX idx_is_read (is_read),
     INDEX idx_created_at (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-supplier_verifications
+-- supplier_verifications
 CREATE TABLE supplier_verifications (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     supplier_id BIGINT UNSIGNED NOT NULL,
@@ -269,7 +269,7 @@ CREATE TABLE supplier_verifications (
     INDEX idx_status (status),
     INDEX idx_verification_type (verification_type)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-supplier_ratings
+-- supplier_ratings
 CREATE TABLE supplier_ratings (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     supplier_id BIGINT UNSIGNED NOT NULL,
@@ -291,7 +291,7 @@ CREATE TABLE supplier_ratings (
     INDEX idx_buyer_id (buyer_id),
     INDEX idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-notifications
+-- notifications
 CREATE TABLE notifications (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT UNSIGNED NOT NULL,
@@ -312,7 +312,7 @@ CREATE TABLE notifications (
     INDEX idx_is_read (is_read),
     INDEX idx_created_at (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-subscriptions
+-- subscriptions
 CREATE TABLE subscriptions (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT UNSIGNED NOT NULL,
@@ -334,7 +334,7 @@ CREATE TABLE subscriptions (
     INDEX idx_status (status),
     INDEX idx_expires_at (expires_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-payments
+-- payments
 CREATE TABLE payments (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT UNSIGNED NOT NULL,
@@ -354,7 +354,7 @@ CREATE TABLE payments (
     INDEX idx_transaction_id (transaction_id),
     INDEX idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-search_logs
+-- search_logs
 CREATE TABLE search_logs (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT UNSIGNED NULL,
@@ -373,7 +373,7 @@ CREATE TABLE search_logs (
     INDEX idx_created_at (created_at),
     FULLTEXT idx_search_query_fulltext (search_query)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-activity_logs
+-- activity_logs
 CREATE TABLE activity_logs (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT UNSIGNED NULL,
@@ -390,7 +390,7 @@ CREATE TABLE activity_logs (
     INDEX idx_entity_type (entity_type),
     INDEX idx_created_at (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-promoted_listings
+-- promoted_listings
 CREATE TABLE promoted_listings (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     product_id BIGINT UNSIGNED NOT NULL,

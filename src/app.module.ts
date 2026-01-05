@@ -32,7 +32,7 @@ import appConfig from './config/app.config';
       useFactory: async (configService: ConfigService) => ({
         store: await redisStore.redisStore({
           socket: {
-            host: configService.get<string>('DB_HOST') || 'localhost', // Assuming Redis is on same host or usage of distinct var
+            host: configService.get<string>('REDIS_HOST') || 'localhost',
             port: 6379,
           },
           ttl: 600,
