@@ -111,3 +111,10 @@ cat dummy_data.sql | docker exec -i devcontainer-db-1 mysql -u root -proot chawr
 
 
 Visit http://localhost:3000/api/docs (or configured port) to see the Swagger UI.
+
+Add "gen:docs": "ts-node src/generate-openapi.ts" (or similar).
+Verification Plan
+Automated Tests
+Run npm run gen:docs.
+Check if openapi.json exists and is valid JSON.
+Verify it contains the expected info (Title: 'ChawriMart API').
